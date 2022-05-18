@@ -18,7 +18,7 @@ const userControllers = {
   },
 
   async getUserById({ params }, res) {
-    const userData = await User.findOne({ _id: params.id }).select("-__v");
+    const userData = await User.findOne({ _id: params.id }).populate('thoughts').select("-__v");
     if(!userData) {
         res.json({message: "Sorry, we could not find a user by that id."})
     }
