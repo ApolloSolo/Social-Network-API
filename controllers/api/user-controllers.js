@@ -5,6 +5,7 @@ const userControllers = {
     const users = await User.find({});
     if (!users.length) {
       res.json({ message: "Currently, there are no users." });
+      return;
     }
     res.json(users);
   },
@@ -21,9 +22,10 @@ const userControllers = {
     const userData = await User.findOne({ _id: params.id })
       .populate("thoughts")
       .populate("friends")
-      .select(["-__v", "-_id", "-email"])
+      .select(["-__v", "-_id", "-email"]);
     if (!userData) {
       res.json({ message: "Sorry, we could not find a user by that id." });
+      return;
     }
     res.json(userData);
   },
@@ -56,6 +58,16 @@ const userControllers = {
       { new: true }
     ).populate("friends");
 
+    res.json(userData);
+  },
+
+  async removeFriend({ params }, res) {
+    const userData = await User.findOneAndUpdate(
+      { _id: params.userId },
+      { $pull: { friends: { $in: [params.friendId] } } },
+      { new: true }
+    ).populate('friends')
+    await userData.save();
     res.json(userData);
   },
 };

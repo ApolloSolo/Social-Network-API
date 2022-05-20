@@ -3,6 +3,10 @@ const { Thought, User } = require("../../models");
 const thoughtControllers = {
   async allThoughts(req, res) {
     const thoughts = await Thought.find({});
+    if(!thoughts.length) {
+      res.json({message: "We have no thoughts!"})
+      return;
+    }
     res.json(thoughts);
   },
 
@@ -39,9 +43,9 @@ const thoughtControllers = {
   async deleteReaction({ params }, res) {
     const thoughtData = await Thought.findOneAndUpdate(
       { _id: params.thoughtId },
-      { $pull: { reactions: {reactionId: params.reactionId} } }
+      { $pull: { reactions: {_id: params.reactionId} } }
     ).populate("reactions");
-    thoughtData.save();
+    await thoughtData.save();
     res.json(thoughtData);
   },
 };
