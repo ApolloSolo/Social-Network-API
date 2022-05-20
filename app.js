@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const ExpressError = require('./ExpressError');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,14 @@ mongoose.connect(
     useUnifiedTopology: true,
   }
 );
+
+app.all('*', (req, res, next) => {
+  next(new ExpressError('Page Not Found', 404));
+})
+
+app.use((err, req, res, next) => {
+  res.json(err);
+})
 
 mongoose.set("debug", true);
 
