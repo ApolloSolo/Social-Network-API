@@ -9,6 +9,7 @@
 ### -[Usage](#usage)
 ### -[Contributing Guidelines](#contributing)
 ### -[Contributors](#contributors)
+### -[Walkthrough Video](#walkthrough video)
 ### -[Licensing](#license)
 
 ## Description
@@ -33,6 +34,8 @@ Clone the develop branch and create your own feature branch from there. If you r
 ## Contributors
 -[ApolloSolo](https://github.com/ApolloSolo)
 
+## Walkthrough Video
+-[Video](https://watch.screencastify.com/v/tKiAn0T93RcjGVetzJPw)
 ## License
 This project is licensed under MIT
 https://api.github.com/licenses/mit
