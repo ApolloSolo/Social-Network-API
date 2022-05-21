@@ -36,8 +36,8 @@ const thoughtControllers = {
     try {
       const thoughtData = await Thought.findOne({
         _id: params.thoughtId,
-      }).populate("user", "username");
-      res.send(thoughtData);
+      }).populate("user");
+      res.json(thoughtData);
     } catch (error) {
       res.json(error);
     }
